@@ -1,4 +1,19 @@
 #{extends 'main.html' /}
 #{set title:'Home' /}
 
-#{welcome /}
+#{if customers}
+<div class="customers">
+    <h2>Customers from the database:</h2>
+    <ul>
+        #{list items:customers, as:'customer'}
+        <li>${customer.fullName}</li>
+        #{/list}
+    </ul>
+</div>
+#{/if}
+
+#{else}
+<div class="empty">
+    No customers in the database!
+</div>
+#{/else}

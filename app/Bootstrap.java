@@ -1,3 +1,7 @@
+
+import models.Customer;
+import play.jobs.Job;
+
 /****************************************************************
  * Licensed to the Apache Software Foundation (ASF) under one   *
  * or more contributor license agreements.  See the NOTICE file *
@@ -16,19 +20,23 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package controllers;
 
 import play.*;
-import play.mvc.*;
+import play.jobs.*;
+import play.test.*;
 
-import java.util.*;
 
-import models.*;
-
-public class Application extends Controller {
-
-    public static void index() {
-        List<Customer> customers = Customer.find("order by fullName asc").fetch();
-        render(customers);
+/**
+ * Load some data for the first time the app starts.
+ * @author ieugen
+ */
+@OnApplicationStart
+public class Bootstrap extends Job<Object> {
+    
+    @Override
+    public void doJob(){
+        if(Customer.count() == 0){
+            Fixtures.loadModels("initial-data.yml");
+        }
     }
 }

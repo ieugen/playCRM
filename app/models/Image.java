@@ -16,19 +16,52 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package controllers;
-
-import play.*;
-import play.mvc.*;
+package models;
 
 import java.util.*;
+import javax.persistence.*;
 
-import models.*;
+import play.db.jpa.*;
+import play.data.validation.*;
 
-public class Application extends Controller {
+/**
+ * For representing an image.
+ * 
+ */
+@Entity
+public class Image extends Model {
 
-    public static void index() {
-        List<Customer> customers = Customer.find("order by fullName asc").fetch();
-        render(customers);
+    public String fileName;
+    public String description;
+    @Lob
+    public byte[] content;
+
+    public Image(String fileName, String description, byte[] content) {
+        this.fileName = fileName;
+        this.description = description;
+        this.content = content;
+    }   
+    
+    @Override
+    public int hashCode() {
+        return fileName.hashCode() * description.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Image other = (Image) obj;
+        if ((this.fileName == null) ? (other.fileName != null) : !this.fileName.equals(other.fileName)) {
+            return false;
+        }
+        if ((this.content == null) ? (other.content != null) : (!(this.content.length == other.content.length))) {
+            return false;
+        }
+        return true;
     }
 }
