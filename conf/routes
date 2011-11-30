@@ -5,6 +5,13 @@
 # Home page
 GET     /                                       Application.index
 
+# url's about customer
+GET     /customers                              Customers.list
+GET     /customers/{id}                         Customers.show
+
+# url's about cars
+GET     /cars                                   Cars.list
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

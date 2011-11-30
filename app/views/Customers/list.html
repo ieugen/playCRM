@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<div id="sidebar">
+    <!-- sidebar goes here-->
+    <h3>Menu Navigation</h3>
+    <ul>
+        <li> #{a @Customers.list()} List customers #{/a} </li>
+        <li><a href="#">Add customer</a></li>
+        <li><a href="#">Remove customers</a></li>
+        <li><a href="#">Search for a customer</a></li>
+    </ul>
+</div>
+
+<div id="content" class="default right">
+    <!-- Main page content in this div-->
+    #{if customers}
+    <div class="customers">
+        <h2>Customers from the database:</h2>
+        <ul>
+            #{list items:customers, as:'customer'}
+            <li>${customer.fullName}</li>
+            #{/list}
+        </ul>
+    </div>
+    #{/if}
+
+    #{else}
+    <div class="empty">
+        No customers in the database!
+    </div>
+    #{/else}
+</div>

@@ -1,0 +1,11 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+#{if customer}
+    <h1>The details for: ${customer.fullName}</h1>
+    <ul>
+        <li>Number of cars: ${customer.cars.size()}</li>
+        <li>Address: ${customer.address}</li>
+        <li>City: ${customer.city}</li>
+    </ul>
+#{/if}

@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Home' /}
+
+<div id="sidebar">
+    <!-- sidebar goes here-->
+    <h3>Menu Navigation</h3>
+    <ul>
+        <li> #{a @Cars.list()}List cars #{/a}</li>
+        <li><a href="#">Add new car</a></li>
+        <li><a href="#">Remove cars</a></li>
+        <li><a href="#">Search for a car?</a></li>
+    </ul>
+</div>
+
+<div id="content" class="default right">
+    <!-- Main page content in this div-->
+    #{if cars}
+    <div class="cars">
+        <h2>cars from the database:</h2>
+        <ul>
+            #{list items:cars, as:'car'}
+            <li>${car.plates} &nbsp; ${car.owner.fullName}</li>
+            #{/list}
+        </ul>
+    </div>
+    #{/if}
+
+    #{else}
+    <div class="empty">
+        No cars in the database!
+    </div>
+    #{/else}
+</div>

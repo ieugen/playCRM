@@ -18,16 +18,18 @@
  ****************************************************************/
 package controllers;
 
-import play.*;
+import java.util.List;
+import models.Car;
 import play.mvc.*;
 
-import java.util.*;
+/**
+ * Controller for Car.
+ * @author ieugen
+ */
+public class Cars extends Controller {
 
-import models.*;
-
-public class Application extends Controller {
-
-    public static void index() {    
-        render();
+    public static void list() {
+        List<Car> cars = Car.find("order by plates asc").fetch();
+        render(cars);
     }
 }
