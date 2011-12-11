@@ -28,24 +28,5 @@ import play.mvc.*;
  * Controller for customer related requests.
  * @author ieugen
  */
-public class Customers extends Controller {
-
-    public static void list() {
-        List<Customer> customers = Customer.find("order by fullName asc").fetch();
-        render(customers);
-    }
-
-    public static void show(Long id) {
-        Customer customer = Customer.findById(id);
-        render(customer);
-    }
-
-    public static void addCustomer(@Required String fullName,
-            String address,
-            String city,
-            String ssn,
-            String info) {
-        Customer customer = new Customer(fullName, address, city, ssn, info).save();
-        show(customer.getId());
-    }
+public class Customers extends CRUD {
 }

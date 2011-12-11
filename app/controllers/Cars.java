@@ -26,10 +26,5 @@ import play.mvc.*;
  * Controller for Car.
  * @author ieugen
  */
-public class Cars extends Controller {
-
-    public static void list() {
-        List<Car> cars = Car.find("order by plates asc").fetch();
-        render(cars);
-    }
+public class Cars extends CRUD {
 }
