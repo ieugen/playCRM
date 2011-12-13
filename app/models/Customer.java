@@ -35,7 +35,7 @@ public class Customer extends Model {
     public String address;
     public String city;
     @ElementCollection
-    public List<String> telephones;
+    public Set<String> telephones;
     @Column(unique = true)
     public String ssn;
     @Lob
@@ -47,7 +47,7 @@ public class Customer extends Model {
         this.fullName = fullName;
         this.address = address;
         this.city = city;
-        this.telephones = new ArrayList<String>();
+        this.telephones = new HashSet<String>();
         this.ssn = ssn;
         this.info = info;
         this.cars = new ArrayList<Car>();

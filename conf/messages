@@ -1,3 +1,11 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+owner=Owner
+plates=Plate Number
+serial=Serial Number
+fullName=Name
+address=Address
+city=City
+ssn=Social security Number
+telephones=Telephone number
