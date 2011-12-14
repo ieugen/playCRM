@@ -22,7 +22,6 @@ import java.util.*;
 import javax.persistence.*;
 
 import play.db.jpa.*;
-import play.data.validation.*;
 
 /**
  * Customer domain model.
@@ -35,7 +34,7 @@ public class Customer extends Model {
     public String address;
     public String city;
     @ElementCollection
-    public Set<String> telephones;
+    public List<String> telephones;
     @Column(unique = true)
     public String ssn;
     @Lob
@@ -47,7 +46,7 @@ public class Customer extends Model {
         this.fullName = fullName;
         this.address = address;
         this.city = city;
-        this.telephones = new HashSet<String>();
+        this.telephones = new ArrayList<String>();
         this.ssn = ssn;
         this.info = info;
         this.cars = new ArrayList<Car>();

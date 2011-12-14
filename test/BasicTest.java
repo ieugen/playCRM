@@ -74,6 +74,9 @@ public class BasicTest extends UnitTest {
 
         assertEquals(1, ioan.telephones.size());
         assertEquals(2, bob.telephones.size());
+        List<String> phones = bob.telephones;
+        assertTrue(phones.contains("0720111222"));
+        assertTrue(phones.contains("0720111333"));
         assertEquals(2, bob.cars.size());
         assertEquals(1, ioan.cars.size());
 
