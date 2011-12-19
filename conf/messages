@@ -8,4 +8,5 @@ fullName=Name
 address=Address
 city=City
 ssn=Social security Number
-telephones=Telephone number
+phone1=Mobile phone
+phone2=Office phone

@@ -33,8 +33,8 @@ public class Customer extends Model {
     public String fullName;
     public String address;
     public String city;
-    @ElementCollection
-    public List<String> telephones;
+    public String phone1;
+    public String phone2;
     @Column(unique = true)
     public String ssn;
     @Lob
@@ -42,11 +42,13 @@ public class Customer extends Model {
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     public List<Car> cars;
 
-    public Customer(String fullName, String address, String city, String ssn, String info) {
+    public Customer(String fullName, String address, String phone1,
+            String phone2, String city, String ssn, String info) {
         this.fullName = fullName;
         this.address = address;
         this.city = city;
-        this.telephones = new ArrayList<String>();
+        this.phone1 = phone1;
+        this.phone2 = phone2;
         this.ssn = ssn;
         this.info = info;
         this.cars = new ArrayList<Car>();
@@ -59,11 +61,6 @@ public class Customer extends Model {
         return this;
     }
 
-    public Customer addTelephone(String telephone) {
-        this.telephones.add(telephone);
-        this.save();
-        return this;
-    }
 
     @Override
     public int hashCode() {

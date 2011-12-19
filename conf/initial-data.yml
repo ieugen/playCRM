@@ -5,7 +5,8 @@ Customer(bob):
   fullName: Bob
   address:  Street
   city:     City
-  telephones: ['0720111222','0720111333']
+  phone1: '0720111222'
+  phone2: '0720111333'
   ssn:      123456789
   info: >
     The best customer for the business.
@@ -14,7 +15,7 @@ Customer(ioan):
   fullName: Ioan
   address:  Arnauti
   city:     City
-  telephones: ['0720111444']
+  phone1: '0720111444'
   ssn:      123456788
   info: >
     Good man, but cheap customer. 

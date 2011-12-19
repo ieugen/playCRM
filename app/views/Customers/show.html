@@ -8,15 +8,6 @@
     <div class="objectForm">
         #{form action:@save(object._key()), enctype:'multipart/form-data'}
         #{crud.form }
-
-        #{crud.custom 'telephones'}
-        <label for="telephones">Telephones</label><br/>
-        <ul id="telephones">
-            #{list items:object.telephones, as:'phone'}
-            <li>${phone}</li>
-            #{/list}
-        </ul>
-        #{/crud.custom}
         #{crud.custom 'cars'}
         <label for="cars">Cars</label><br/>
         <ul id="cars">
