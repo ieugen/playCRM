@@ -18,12 +18,14 @@
  ****************************************************************/
 package controllers;
 
-import play.data.validation.*;
+
+import models.Car;
 import play.mvc.*;
 
 /**
- * Controller for customer related requests.
+ * CRUD for Event types.
  * @author ieugen
  */
-public class Customers extends CRUD {
+public class EventTypes extends CRUD {
+    
 }

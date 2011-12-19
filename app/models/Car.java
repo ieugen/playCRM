@@ -39,12 +39,15 @@ public class Car extends Model {
     public String info;
     @ManyToOne
     public Customer owner;
+    @OneToMany(mappedBy = "target", cascade = CascadeType.ALL)
+    List<Event> events;
 
     public Car(String serial, String plates, String info, Customer owner) {
         this.serial = serial;
         this.info = info;
         this.plates = plates;
         this.owner = owner;
+        this.events = new ArrayList<Event>();
     }
 
     @Override

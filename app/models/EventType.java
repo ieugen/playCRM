@@ -16,14 +16,35 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package controllers;
+package models;
 
-import play.data.validation.*;
-import play.mvc.*;
+import play.db.jpa.Model;
+
+import java.util.*;
+import javax.persistence.*;
+
+import play.data.validation.Required;
+import play.db.jpa.*;
 
 /**
- * Controller for customer related requests.
+ * Models an event type. 
  * @author ieugen
  */
-public class Customers extends CRUD {
+@Entity
+public class EventType extends Model {
+    
+    @Required
+    public String evTypeName;
+    public String evTypeInfo;
+
+    public EventType(String evTypeName, String evTypeInfo) {
+        this.evTypeName = evTypeName;
+        this.evTypeInfo = evTypeInfo;
+    }
+
+    @Override
+    public String toString() {
+        return evTypeName;
+    }
+    
 }

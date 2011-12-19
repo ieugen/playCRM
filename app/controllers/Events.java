@@ -18,12 +18,18 @@
  ****************************************************************/
 package controllers;
 
+
+import java.util.List;
+import java.util.Set;
+import models.Customer;
+
 import play.data.validation.*;
 import play.mvc.*;
 
 /**
- * Controller for customer related requests.
+ * CURUD for Events.
  * @author ieugen
  */
-public class Customers extends CRUD {
+public class Events extends CRUD{
+    
 }

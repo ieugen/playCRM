@@ -18,7 +18,6 @@
  ****************************************************************/
 package controllers;
 
-import java.util.List;
 import models.Car;
 import play.mvc.*;
 

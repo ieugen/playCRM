@@ -16,14 +16,40 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package controllers;
+package models;
 
-import play.data.validation.*;
-import play.mvc.*;
+import java.util.*;
+import javax.persistence.*;
+
+import play.data.validation.Required;
+import play.db.jpa.*;
+
 
 /**
- * Controller for customer related requests.
+ * Creates an event that will expire and issue a notification.
  * @author ieugen
  */
-public class Customers extends CRUD {
+@Entity
+public class Event extends Model{
+    
+    @Required
+    @ManyToOne
+    public EventType eventType;
+    @Required
+    public Date starts;
+    @Required
+    public Date expires;
+    @ManyToOne
+    public Car target;
+
+    public Event(EventType eventType, Date starts, Date expires) {
+        this.eventType = eventType;
+        this.starts = starts;
+        this.expires = expires;
+    }
+
+    @Override
+    public String toString() {
+        return eventType.toString();
+    }
 }

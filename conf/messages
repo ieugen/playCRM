@@ -1,12 +1,21 @@
 # You can specialize this file for each language.
 # For example, for French create a messages.fr file
 #
+
+# Car related messages
 owner=Owner
 plates=Plate Number
 serial=Serial Number
+
+#Customer related messages
 fullName=Name
 address=Address
 city=City
 ssn=Social security Number
 phone1=Mobile phone
 phone2=Office phone
+info=Info
+
+# EventType related messages
+name=Name
+
