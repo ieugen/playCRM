@@ -40,7 +40,9 @@ public class Car extends Model {
     @ManyToOne
     public Customer owner;
     @OneToMany(mappedBy = "target", cascade = CascadeType.ALL)
-    List<Event> events;
+    public List<Event> events;
+    @OneToMany(cascade = CascadeType.ALL)
+    public List<Picture> carPictures;
 
     public Car(String serial, String plates, String info, Customer owner) {
         this.serial = serial;
@@ -48,6 +50,7 @@ public class Car extends Model {
         this.plates = plates;
         this.owner = owner;
         this.events = new ArrayList<Event>();
+        this.carPictures = new ArrayList<Picture>();
     }
 
     @Override

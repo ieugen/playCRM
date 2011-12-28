@@ -31,5 +31,4 @@ import play.mvc.*;
  * @author ieugen
  */
 public class Events extends CRUD{
-    
 }
