@@ -16,7 +16,9 @@
     </div>
 
     <div class="pictureForm">
+    <h3 id="uploadPicture">Upload picture</h3>
     #{form action:@Cars.uploadPicture(object.id,image), enctype:'multipart/form-data'}
+
         <input type="hidden" name="carUID" value="${object._key()}"/>
         <input type="file" name="image" />
         <input type="submit" name="submit" value="Save" />
