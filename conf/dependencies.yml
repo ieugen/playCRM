@@ -2,3 +2,11 @@
 
 require:
     - play -> crud
+    - provided -> Thumbnailator 0.3.10-all
+
+repositories:
+    - jars:
+        type:       local
+        artifact:   ${application.path}/jar/[module]-[revision].jar
+        contains:
+            - provided -> *
