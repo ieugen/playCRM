@@ -2,11 +2,11 @@
 
 require:
     - play -> crud
-    - provided -> Thumbnailator 0.3.10-all
+    - net.coobird.thumbnailator.Thumbnails -> Thumbnailator 0.3.10-all
 
 repositories:
-    - jars:
+    - provided:
         type:       local
-        artifact:   ${application.path}/jar/[module]-[revision].jar
+        artifact:   "${application.path}/jar/[module]-[revision].jar"
         contains:
-            - provided -> *
+            - net.coobird.thumbnailator.Thumbnails -> *
