@@ -1,4 +1,3 @@
-
 /****************************************************************
  * Licensed to the Apache Software Foundation (ASF) under one   *
  * or more contributor license agreements.  See the NOTICE file *
@@ -17,10 +16,15 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-import org.junit.*;
-import java.util.*;
-import play.test.*;
-import models.*;
+
+import models.Car;
+import models.Customer;
+import org.junit.Before;
+import org.junit.Test;
+import play.test.Fixtures;
+import play.test.UnitTest;
+
+import java.util.List;
 
 public class BasicTest extends UnitTest {
 

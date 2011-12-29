@@ -1,6 +1,7 @@
-
 import models.Customer;
 import play.jobs.Job;
+import play.jobs.OnApplicationStart;
+import play.test.Fixtures;
 
 /****************************************************************
  * Licensed to the Apache Software Foundation (ASF) under one   *
@@ -21,21 +22,18 @@ import play.jobs.Job;
  * under the License.                                           *
  ****************************************************************/
 
-import play.*;
-import play.jobs.*;
-import play.test.*;
-
 
 /**
  * Load some data for the first time the app starts.
+ *
  * @author ieugen
  */
 @OnApplicationStart
 public class Bootstrap extends Job<Object> {
-    
+
     @Override
-    public void doJob(){
-        if(Customer.count() == 0){
+    public void doJob() {
+        if (Customer.count() == 0) {
             Fixtures.loadModels("initial-data.yml");
         }
     }

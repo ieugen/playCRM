@@ -12,22 +12,39 @@
         <label for="cars">Cars</label><br/>
         <ul id="cars">
             #{list items:object.cars, as:'car'}
-            <li><a href="@{Cars.show(car.id)}" >${car}</a></li>
+            <li><a href="@{Cars.show(car.id)}">${car}</a></li>
+            #{/list}
+        </ul>
+        #{/crud.custom}
+        #{crud.custom 'customerPictures'}
+        <label for="customerPictures">Customer pictures</label><br/>
+        <ul id="customerPictures">
+            #{list items:object.customerPictures, as:'pic'}
+            <li><a href="@{Application.getCustomerPicture(pic.id)}" name="${pic.pictureName}"><img src="@{Application.getCustomerPictureThumbnail(pic.id)}" alt="${pic.pictureName}"/></a>  </li>
             #{/list}
         </ul>
         #{/crud.custom}
         #{/crud.form}
         <p class="crudButtons">
-            <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />
-            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+            <input type="submit" name="_save" value="&{'crud.save', type.modelName}"/>
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}"/>
         </p>
         #{/form}
     </div>
 
     #{form @delete(object._key())}
     <p class="crudDelete">
-        <input type="submit" value="&{'crud.delete', type.modelName}" />
+        <input type="submit" value="&{'crud.delete', type.modelName}"/>
     </p>
     #{/form}
+
+    <div class="pictureForm">
+        <h3 id="uploadPicture">Upload picture</h3>
+        #{form action:@Customers.uploadPicture(object.id,image), enctype:'multipart/form-data'}
+
+        <input type="file" name="image"/>
+        <input type="submit" name="submit" value="Save"/>
+        #{/form}
+    </div>
 
 </div>

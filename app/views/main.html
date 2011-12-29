@@ -1,48 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="${lang}" lang="${lang}">
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta charset="${_response_encoding}"></meta>
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}"/>
-        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/crud.css'}" />   
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
-        <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-    </head>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}"></meta>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}"/>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/crud.css'}"/>
+    <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}"/>
+    <script src="@{'/public/javascripts/jquery-1.5.2.min.js'}" type="text/javascript"
+            charset="${_response_encoding}"></script>
+</head>
 
-    <body>
-        <div id="wrap">
-            <div id="header">
-                <h1>Customer relations</h1>
-                <h2>Mail me for your web app.<br/>
-                    <span id="reclama"><a href="mailto:stan.ieugen@gmail.com">Ioan Eugen Stan</a> gets your app running.</span>
-                </h2>
-            </div>
+<body>
+<div id="wrap">
+    <div id="header">
+        <h1>Customer relations</h1>
 
-            <div id="menu">
-                <!-- the menu goes here-->
-                <ul>
-                    <li><a href="/" >Home</a></li>
-                    <li><a href="/customers">Customers</a></li>
-                    <li><a href="/cars" >Cars</a></li>
-                    <li><a href="/events">Events</a></li>
-                    <li><a href="/eventtypes">Event types</a></li>
-                    <li><a href="/notifications" >Notifications</a></li>
-                    <li><a href="/about" >Contact</a></li>
-                </ul>
-            </div>
+        <h2>Mail me for your web app.<br/>
+            <span id="reclama"><a href="mailto:stan.ieugen@gmail.com">Ioan Eugen Stan</a> gets your app running.</span>
+        </h2>
+    </div>
 
-            <div id="top"> </div>
-            <!-- div content will be replaced by javascript calls -->
-            <div id="contentwrap"> 
-                #{doLayout /} 
-                <div style="clear: both;"> </div>
-            </div>
+    <div id="menu">
+        <!-- the menu goes here-->
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/customers">Customers</a></li>
+            <li><a href="/cars">Cars</a></li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/eventtypes">Event types</a></li>
+            <li><a href="/notifications">Notifications</a></li>
+            <li><a href="/about">Contact</a></li>
+        </ul>
+    </div>
 
-            <div id="footer">
-                <p>&copy; Copyright 2011 <a href="http://ieugen.blogspot.com">Ioan Eugen Stan</a></p>
-            </div>
+    <div id="top"></div>
+    <!-- div content will be replaced by javascript calls -->
+    <div id="contentwrap">
+        #{doLayout /}
+        <div style="clear: both;"></div>
+    </div>
 
-        </div>
+    <div id="footer">
+        <p>&copy; Copyright 2011 <a href="http://ieugen.blogspot.com">Ioan Eugen Stan</a></p>
+    </div>
 
-    </body>
+</div>
+
+</body>
 </html>

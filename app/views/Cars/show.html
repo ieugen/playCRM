@@ -6,29 +6,44 @@
     <h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
 
     <div class="objectForm">
-    #{form action:@save(object._key()), enctype:'multipart/form-data'}
-        #{crud.form /}
+        #{form action:@save(object._key()), enctype:'multipart/form-data'}
+        #{crud.form }
+        #{crud.custom 'carPictures'}
+
+
+        <label for="carsPictures">Car pictures</label><br/>
+        <ul id="carsPictures">
+            #{list items:object.carPictures, as:'pic'}
+            <li><a href="@{Application.getCarPicture(pic.id)}" name="${pic.pictureName}"><img
+                    src="@{Application.getCarPictureThumbnail(pic.id)}" alt="${pic.pictureName}"/></a></li>
+            #{/list}
+        </ul>
+
+        #{/crud.custom}
+        #{/crud.form}
+
         <p class="crudButtons">
-            <input type="submit" name="_save" value="&{'crud.save', type.modelName}" />
-            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+            <input type="submit" name="_save" value="&{'crud.save', type.modelName}"/>
+            <input type="submit" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}"/>
         </p>
-    #{/form}
-    </div>
+        #{/form}
 
-    <div class="pictureForm">
-    <h3 id="uploadPicture">Upload picture</h3>
-    #{form action:@Cars.uploadPicture(object.id,image), enctype:'multipart/form-data'}
-
-        <input type="hidden" name="carUID" value="${object._key()}"/>
-        <input type="file" name="image" />
-        <input type="submit" name="submit" value="Save" />
-    #{/form}
     </div>
 
     #{form @delete(object._key())}
-        <p class="crudDelete">
-            <input type="submit" value="&{'crud.delete', type.modelName}" />
-        </p>
+    <p class="crudDelete">
+        <input type="submit" value="&{'crud.delete', type.modelName}"/>
+    </p>
     #{/form}
+
+    <div class="pictureForm">
+        <h3 id="uploadPicture">Upload picture</h3>
+        #{form action:@Cars.uploadPicture(object.id,image), enctype:'multipart/form-data'}
+
+        <input type="hidden" name="id" value="${object._key()}"/>
+        <input type="file" name="image"/>
+        <input type="submit" name="submit" value="Save"/>
+        #{/form}
+    </div>
 
 </div>

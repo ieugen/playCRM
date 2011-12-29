@@ -1,4 +1,4 @@
-package controllers; /******************************************************************************
+/******************************************************************************
  * Licensed to the Apache Software Foundation (ASF) under one                 *
  * or more contributor license agreements.  See the NOTICE file               *
  * distributed with this work for additional information                      *
@@ -17,52 +17,26 @@ package controllers; /**********************************************************
  * under the License.                                                         *
  ******************************************************************************/
 
-import net.coobird.thumbnailator.Thumbnails;
-import play.Logger;
-import play.Play;
-import play.libs.Files;
+package models;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import play.db.jpa.Blob;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 
 /**
  * Make me change this description.
  * User: ieugen
- * Date: 26.12.2011
- * Time: 13:56
+ * Date: 29.12.2011
+ * Time: 20:58
  */
-public class Utils {
+@Entity
+public class CustomerPicture extends Picture {
+    @ManyToOne
+    public Customer owner;
 
-    public static final String THUMBNAIL_PREFIX = "thumbs_";
-
-    /**
-     * Create e thumbnail for a given file. Does not check if file is an image..
-     *
-     * @param image the image for which you wish to create a thumbnail.
-     */
-    public static void generateThumbnail(File image) {
-        File thumbnail = thumbnailFile(image);
-        BufferedOutputStream out = null;
-        try {
-            out = new BufferedOutputStream(new FileOutputStream(thumbnail));
-            Thumbnails.of(image)
-                    .size(160, 160)
-                    .toOutputStream(out);
-        } catch (IOException e) {
-            Logger.info("Exception creating thumbnail for image {}", thumbnail.toString());
-        }
-    }
-
-    /**
-     * Generate a thumbnail file for a given picture.
-     * Linux path separator (/) is assumed.
-     * @param image
-     * @return
-     */
-    public static File thumbnailFile(File image) {
-        return new File(image.getParent() + "/" + THUMBNAIL_PREFIX + image.getName());
+    public CustomerPicture(String pictureName, Blob image) {
+        super(pictureName, image);
     }
 
 }

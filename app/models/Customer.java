@@ -43,7 +43,10 @@ public class Customer extends Model {
     public String info;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     public List<Car> cars;
-
+    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL)
+    public List<CustomerPicture> customerPictures;
+    
+    
     public Customer(String fullName, String address, String phone1,
                     String phone2, String city, String ssn, String info) {
         this.fullName = fullName;
@@ -54,6 +57,7 @@ public class Customer extends Model {
         this.ssn = ssn;
         this.info = info;
         this.cars = new ArrayList<Car>();
+        this.customerPictures = new ArrayList<CustomerPicture>();
     }
 
     public Customer addCar(String serial, String plates, String info) {

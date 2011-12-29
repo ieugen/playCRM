@@ -19,6 +19,7 @@
 package controllers;
 
 import models.Car;
+import models.CarPicture;
 import models.Picture;
 import play.Logger;
 import play.data.validation.Required;
@@ -36,25 +37,16 @@ import java.io.FileNotFoundException;
  */
 public class Cars extends CRUD {
 
-    public static void uploadPicture(@Required Long carID, @Required File image) throws FileNotFoundException {
-        /*long id = 0L;
-        try {
-            id  = params.get("carUID",Long.class);
-        } catch (Exception e){
-            Logger.warn("Missing ");
-        }*/
-        Car car = Car.findById(carID);
-        Logger.info(car.toString());
+    public static void uploadPicture(@Required Long id, @Required File image) throws FileNotFoundException {
+        Car car = Car.findById(id);
         Blob imageBlob = new Blob();
         imageBlob.set(new FileInputStream(image), MimeTypes.getContentType(image.getName()));
-        Picture picture = new Picture(image.getName(), imageBlob);
+        CarPicture picture = new CarPicture(image.getName(), imageBlob);
+        picture.owner = car;
         car.carPictures.add(picture);
         picture.save();
-        Picture.createThumbnail(picture.image.getFile());
-        System.out.println(Picture.count());
-        System.out.println(Picture.all().fetch());
-        redirect(request.controller + ".show", Long.toString(carID));
+        Logger.info("Generating thumbnail for image: " + picture.image.getFile().toString());
+        Utils.generateThumbnail(picture.image.getFile());
+        redirect(request.controller + ".show", Long.toString(id));
     }
-
-
 }

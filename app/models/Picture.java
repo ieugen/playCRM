@@ -18,7 +18,7 @@
  ****************************************************************/
 package models;
 
-import net.coobird.thumbnailator.Thumbnails;
+import controllers.Utils;
 import play.Logger;
 import play.data.validation.Check;
 import play.data.validation.CheckWith;
@@ -27,10 +27,9 @@ import play.db.jpa.Model;
 
 import javax.imageio.ImageIO;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.awt.image.BufferedImage;
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
@@ -39,7 +38,7 @@ import java.io.IOException;
  * @author ieugen
  */
 @Entity
-public class Picture extends Model {
+public abstract class Picture extends Model {
 
     public String pictureName;
     @CheckWith(PictureCheck.class)
@@ -55,17 +54,14 @@ public class Picture extends Model {
         return pictureName + "\t" + image.length() / 1024 + " KB";
     }
 
-    public static void createThumbnail(File image) {
-        String name = image.getParent() + "/thumb-" + image.getName();
-        BufferedOutputStream out = null;
-        try {
-            out = new BufferedOutputStream(new FileOutputStream(new File(name)));
-            Thumbnails.of(image)
-                    .size(160, 160)
-                    .toOutputStream(out);
-        } catch (IOException e) {
-            Logger.info("Exception creating thumbnail for image {}", name);
-        }
+    @Override
+    public void _delete() {
+        Logger.info("Deleting picture :" + this.toString());
+        super._delete();
+        // delete the image and the associated thumbnail
+        File thumbnail = Utils.thumbnailFile(image.getFile());
+        thumbnail.delete();
+        image.getFile().delete();
     }
 
     static class PictureCheck extends Check {
@@ -88,7 +84,6 @@ public class Picture extends Model {
             if (((Blob) image).getFile().length() > MAX_SIZE) {
                 return false;
             }
-
 
             try {
                 BufferedImage source = ImageIO.read(((Blob) image).getFile());
