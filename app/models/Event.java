@@ -18,20 +18,22 @@
  ****************************************************************/
 package models;
 
-import java.util.*;
-import javax.persistence.*;
-
 import play.data.validation.Required;
-import play.db.jpa.*;
+import play.db.jpa.Model;
+
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import java.util.Date;
 
 
 /**
  * Creates an event that will expire and issue a notification.
+ *
  * @author ieugen
  */
 @Entity
-public class Event extends Model{
-    
+public class Event extends Model {
+
     @Required
     @ManyToOne
     public EventType eventType;

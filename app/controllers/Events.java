@@ -19,16 +19,10 @@
 package controllers;
 
 
-import java.util.List;
-import java.util.Set;
-import models.Customer;
-
-import play.data.validation.*;
-import play.mvc.*;
-
 /**
  * CURUD for Events.
+ *
  * @author ieugen
  */
-public class Events extends CRUD{
+public class Events extends CRUD {
 }

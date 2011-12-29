@@ -18,11 +18,9 @@
  ****************************************************************/
 package controllers;
 
-import play.data.validation.*;
-import play.mvc.*;
-
 /**
  * Controller for customer related requests.
+ *
  * @author ieugen
  */
 public class Customers extends CRUD {

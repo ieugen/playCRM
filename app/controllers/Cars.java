@@ -18,24 +18,25 @@
  ****************************************************************/
 package controllers;
 
-import models.*;
+import models.Car;
+import models.Picture;
 import play.Logger;
-import play.data.validation.*;
-import play.db.jpa.*;
-import play.libs.Files;
+import play.data.validation.Required;
+import play.db.jpa.Blob;
 import play.libs.MimeTypes;
-import play.mvc.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 /**
  * Controller for Car.
+ *
  * @author ieugen
  */
 public class Cars extends CRUD {
 
-    public static void uploadPicture(@Required Long carID, @Required File image) throws FileNotFoundException{
+    public static void uploadPicture(@Required Long carID, @Required File image) throws FileNotFoundException {
         /*long id = 0L;
         try {
             id  = params.get("carUID",Long.class);
@@ -46,9 +47,10 @@ public class Cars extends CRUD {
         Logger.info(car.toString());
         Blob imageBlob = new Blob();
         imageBlob.set(new FileInputStream(image), MimeTypes.getContentType(image.getName()));
-        Picture picture = new Picture(image.getName(),imageBlob);
+        Picture picture = new Picture(image.getName(), imageBlob);
         car.carPictures.add(picture);
         picture.save();
+        Picture.createThumbnail(picture.image.getFile());
         System.out.println(Picture.count());
         System.out.println(Picture.all().fetch());
         redirect(request.controller + ".show", Long.toString(carID));

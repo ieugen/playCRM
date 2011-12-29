@@ -18,13 +18,15 @@
  ****************************************************************/
 package models;
 
-import java.util.*;
-import javax.persistence.*;
+import play.db.jpa.Model;
 
-import play.db.jpa.*;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Customer domain model.
+ *
  * @author ieugen
  */
 @Entity
@@ -43,7 +45,7 @@ public class Customer extends Model {
     public List<Car> cars;
 
     public Customer(String fullName, String address, String phone1,
-            String phone2, String city, String ssn, String info) {
+                    String phone2, String city, String ssn, String info) {
         this.fullName = fullName;
         this.address = address;
         this.city = city;

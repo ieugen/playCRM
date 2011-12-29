@@ -18,15 +18,13 @@
  ****************************************************************/
 package models;
 
-import java.util.*;
-import javax.persistence.*;
+import play.db.jpa.Model;
 
-import play.db.jpa.*;
-import play.data.validation.*;
+import javax.persistence.Entity;
+import javax.persistence.Lob;
 
 /**
  * For representing an image.
- * 
  */
 @Entity
 public class Image extends Model {
@@ -40,8 +38,8 @@ public class Image extends Model {
         this.fileName = fileName;
         this.description = description;
         this.content = content;
-    }   
-    
+    }
+
     @Override
     public int hashCode() {
         return fileName.hashCode() * description.hashCode();

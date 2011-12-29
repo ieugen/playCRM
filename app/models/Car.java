@@ -18,15 +18,16 @@
  ****************************************************************/
 package models;
 
-import java.util.*;
-import javax.persistence.*;
+import play.db.jpa.Model;
 
-import play.db.jpa.*;
-import play.data.validation.*;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Creates a schema mapping for a Car. We extend Model so we get all the goodies
  * that come with that.
+ *
  * @author ieugen
  */
 @Entity

@@ -19,13 +19,11 @@
 package controllers;
 
 
-import models.Car;
-import play.mvc.*;
-
 /**
  * CRUD for Event types.
+ *
  * @author ieugen
  */
 public class EventTypes extends CRUD {
-    
+
 }

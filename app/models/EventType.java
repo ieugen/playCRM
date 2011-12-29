@@ -18,21 +18,19 @@
  ****************************************************************/
 package models;
 
+import play.data.validation.Required;
 import play.db.jpa.Model;
 
-import java.util.*;
-import javax.persistence.*;
-
-import play.data.validation.Required;
-import play.db.jpa.*;
+import javax.persistence.Entity;
 
 /**
- * Models an event type. 
+ * Models an event type.
+ *
  * @author ieugen
  */
 @Entity
 public class EventType extends Model {
-    
+
     @Required
     public String evTypeName;
     public String evTypeInfo;
@@ -46,5 +44,5 @@ public class EventType extends Model {
     public String toString() {
         return evTypeName;
     }
-    
+
 }

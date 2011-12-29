@@ -18,23 +18,29 @@
  ****************************************************************/
 package models;
 
-import javax.imageio.ImageIO;
-import javax.persistence.Entity;
-
-import play.data.validation.*;
+import net.coobird.thumbnailator.Thumbnails;
+import play.Logger;
+import play.data.validation.Check;
+import play.data.validation.CheckWith;
 import play.db.jpa.Blob;
 import play.db.jpa.Model;
 
+import javax.imageio.ImageIO;
+import javax.persistence.Entity;
 import java.awt.image.BufferedImage;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 /**
  * Model for pictures.
+ *
  * @author ieugen
  */
 @Entity
-public class Picture extends Model{
-    
+public class Picture extends Model {
+
     public String pictureName;
     @CheckWith(PictureCheck.class)
     public Blob image;
@@ -46,7 +52,20 @@ public class Picture extends Model{
 
     @Override
     public String toString() {
-        return pictureName + "\t" + image.length()/1024 + " KB";
+        return pictureName + "\t" + image.length() / 1024 + " KB";
+    }
+
+    public static void createThumbnail(File image) {
+        String name = image.getParent() + "/thumb-" + image.getName();
+        BufferedOutputStream out = null;
+        try {
+            out = new BufferedOutputStream(new FileOutputStream(new File(name)));
+            Thumbnails.of(image)
+                    .size(160, 160)
+                    .toOutputStream(out);
+        } catch (IOException e) {
+            Logger.info("Exception creating thumbnail for image {}", name);
+        }
     }
 
     static class PictureCheck extends Check {
