@@ -19,8 +19,7 @@
 package controllers;
 
 import models.Car;
-import models.CarPicture;
-import models.Picture;
+import models.CarFile;
 import play.Logger;
 import play.data.validation.Required;
 import play.db.jpa.Blob;
@@ -37,16 +36,15 @@ import java.io.FileNotFoundException;
  */
 public class Cars extends CRUD {
 
-    public static void uploadPicture(@Required Long id, @Required File image) throws FileNotFoundException {
+    public static void uploadFile(@Required Long id, @Required File file) throws FileNotFoundException {
+        Logger.info("Uploading file :" + file.toString() + " " + MimeTypes.getContentType(file.getName()));
         Car car = Car.findById(id);
-        Blob imageBlob = new Blob();
-        imageBlob.set(new FileInputStream(image), MimeTypes.getContentType(image.getName()));
-        CarPicture picture = new CarPicture(image.getName(), imageBlob);
-        picture.owner = car;
-        car.carPictures.add(picture);
-        picture.save();
-        Logger.info("Generating thumbnail for image: " + picture.image.getFile().toString());
-        Utils.generateThumbnail(picture.image.getFile());
+        Blob blob = new Blob();
+        blob.set(new FileInputStream(file), MimeTypes.getContentType(file.getName()));
+        CarFile carFile = new CarFile(file.getName(), blob);
+        carFile.owner = car;
+        car.carFiles.add(carFile);
+        carFile.save();
         redirect(request.controller + ".show", Long.toString(id));
     }
 }

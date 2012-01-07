@@ -18,11 +18,8 @@
  ****************************************************************/
 package controllers;
 
-import models.Car;
-import models.CarPicture;
 import models.Customer;
-import models.CustomerPicture;
-import play.Logger;
+import models.CustomerFile;
 import play.data.validation.Required;
 import play.db.jpa.Blob;
 import play.libs.MimeTypes;
@@ -38,16 +35,14 @@ import java.io.FileNotFoundException;
  */
 public class Customers extends CRUD {
 
-    public static void uploadPicture(@Required Long id, @Required File image) throws FileNotFoundException {
+    public static void uploadFile(@Required Long id, @Required File customerFile) throws FileNotFoundException {
         Customer customer = Customer.findById(id);
-        Blob imageBlob = new Blob();
-        imageBlob.set(new FileInputStream(image), MimeTypes.getContentType(image.getName()));
-        CustomerPicture picture = new CustomerPicture(image.getName(), imageBlob);
-        picture.owner = customer;
-        customer.customerPictures.add(picture);
-        picture.save();
-        Logger.info("Generating thumbnail for image: " + picture.image.getFile().toString());
-        Utils.generateThumbnail(picture.image.getFile());
+        Blob blob = new Blob();
+        blob.set(new FileInputStream(customerFile), MimeTypes.getContentType(customerFile.getName()));
+        CustomerFile file1 = new CustomerFile(customerFile.getName(), blob);
+        file1.owner = customer;
+        customer.customerFiles.add(file1);
+        file1.save();
         redirect(request.controller + ".show", Long.toString(id));
     }
 }

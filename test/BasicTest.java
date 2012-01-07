@@ -35,21 +35,18 @@ public class BasicTest extends UnitTest {
 
     @Test
     public void createAndRetrieveCustomer() {
-        Customer bob = new Customer("Bob", "Earth", "Milkyway", "123456789", "a welcomed guy");
-        bob.addTelephone("0720111222");
-        bob.addTelephone("0720111333");
+        Customer bob = new Customer("Bob", "Earth", "0720111222", "0720111333", "New York", "123456789", "a welcomed guy");
         bob.save();
         Customer customer = Customer.find("bySsn", "123456789").first();
-
         assertNotNull(customer);
         assertEquals("Bob", customer.fullName);
-        assertEquals(2, customer.telephones.size());
-        assertTrue(customer.telephones.contains("0720111222"));
+        assertTrue(customer.phone1.equals("0720111222"));
+        assertTrue(customer.phone2.equals("0720111333"));
     }
 
     @Test
     public void createCar() {
-        Customer bob = new Customer("Bob", "Earth", "Milkyway", "123456789", "a welcomed guy").save();
+        Customer bob = new Customer("Bob", "Earth", "0720111222", "0720111333", "New York", "123456789", "a welcomed guy").save();
         new Car("123", "ph-07-AAA", "white Mercedes", bob).save();
 
         assertEquals(1, Car.count());
@@ -70,19 +67,14 @@ public class BasicTest extends UnitTest {
         Fixtures.loadModels("data.yml");
         assertEquals(2, Customer.count());
         assertEquals(3, Car.count());
-
         Customer bob = Customer.find("byFullName", "Bob").first();
         Customer ioan = Customer.find("byFullName", "Ioan").first();
         assertNotNull(bob);
         assertNotNull(ioan);
-
-        assertEquals(1, ioan.telephones.size());
-        assertEquals(2, bob.telephones.size());
-        List<String> phones = bob.telephones;
-        assertTrue(phones.contains("0720111222"));
-        assertTrue(phones.contains("0720111333"));
+        assertTrue(bob.phone1.equals("0720111222"));
+        assertTrue(bob.phone2,equals("0720111333"));
         assertEquals(2, bob.cars.size());
         assertEquals(1, ioan.cars.size());
-
     }
+
 }

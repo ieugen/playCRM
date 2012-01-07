@@ -19,50 +19,44 @@
 package controllers;
 
 import models.Car;
-import models.CarPicture;
-import models.CustomerPicture;
-import models.Picture;
+import models.CarFile;
+import models.CustomerFile;
 import play.Logger;
 import play.mvc.Controller;
 
+/**
+ * Controller for website index and misc methods.
+ */
 public class Application extends Controller {
 
-
     public static void index() {
-        Car c = Car.findById(1L);
-        Logger.info("Info for car with id 1" + c.toString());
-        for (Picture p: c.carPictures){
-            Logger.info("Pictures "+ p.toString());
-        }
         render();
     }
 
-    public static void getCarPicture(long id) {
-        CarPicture picture = CarPicture.findById(id);
-        Logger.info("Sending picture: "+ picture.toString());
-        response.setContentTypeIfNotSet(picture.image.type());
-        renderBinary(picture.image.get());
+    public static void getCarFile(long id) {
+        CarFile file = CarFile.findById(id);
+        Logger.info("Sending file: "+ file.toString());
+        renderBinary(file.blob.get(),file.fileName, file.blob.type(),false);
     }
 
-    public static void getCarPictureThumbnail(long id) {
-        CarPicture picture = CarPicture.findById(id);
-        Logger.info("Sending thumbnail: "+ picture.toString());
-        response.setContentTypeIfNotSet(picture.image.type());
-        renderBinary(Utils.thumbnailFile(picture.image.getFile()));
+    public static void deleteCarFile(Long carId, Long id){
+        Logger.info(request.controllerClass.toString());
+        CarFile file = CarFile.findById(id);
+        file.delete();
+        redirect("Cars.show", Long.toString(carId));
     }
 
-    public static void getCustomerPicture(long id) {
-        CustomerPicture picture = CustomerPicture.findById(id);
-        Logger.info("Sending picture: "+ picture.toString());
-        response.setContentTypeIfNotSet(picture.image.type());
-        renderBinary(picture.image.get());
+    public static void deleteCustomerFile(Long carId, Long id){
+        Logger.info(request.controllerClass.toString());
+        CustomerFile file = CustomerFile.findById(id);
+        file.delete();
+        redirect("Customers.show", Long.toString(carId));
     }
 
-    public static void getCustomerPictureThumbnail(long id){
-        CustomerPicture picture = CustomerPicture.findById(id);
-        Logger.info("Sending thumbnail: "+ picture.toString());
-        response.setContentTypeIfNotSet(picture.image.type());
-        renderBinary(Utils.thumbnailFile(picture.image.getFile()));
+    public static void getCustomerFile(long id) {
+        CustomerFile file = CustomerFile.findById(id);
+        Logger.info("Sending file: "+ file.toString());
+        renderBinary(file.blob.get(),file.fileName, file.blob.type(),false);
     }
 
 }

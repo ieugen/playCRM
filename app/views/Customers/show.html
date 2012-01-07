@@ -16,11 +16,12 @@
             #{/list}
         </ul>
         #{/crud.custom}
-        #{crud.custom 'customerPictures'}
-        <label for="customerPictures">Customer pictures</label><br/>
-        <ul id="customerPictures">
-            #{list items:object.customerPictures, as:'pic'}
-            <li><a href="@{Application.getCustomerPicture(pic.id)}" name="${pic.pictureName}"><img src="@{Application.getCustomerPictureThumbnail(pic.id)}" alt="${pic.pictureName}"/></a>  </li>
+        #{crud.custom 'customerFiles'}
+        <label for="customerFiles">Customer files</label><br/>
+        <ul id="customerFiles">
+            #{list items:object.customerFiles, as:'cFile'}
+            <li><a href="@{Application.getCustomerFile(cFile.id)}">${cFile.fileName}</a>
+            <a href="@{Application.deleteCustomerFile(object.id,cFile.id)}">Delete</a> </li>
             #{/list}
         </ul>
         #{/crud.custom}
@@ -38,11 +39,10 @@
     </p>
     #{/form}
 
-    <div class="pictureForm">
-        <h3 id="uploadPicture">Upload picture</h3>
-        #{form action:@Customers.uploadPicture(object.id,image), enctype:'multipart/form-data'}
-
-        <input type="file" name="image"/>
+    <div class="fileForm">
+        <h3 id="uploadFile">Upload file</h3>
+        #{form action:@Customers.uploadFile(object.id,customerFile), enctype:'multipart/form-data'}
+        <input type="file" name="customerFile"/>
         <input type="submit" name="submit" value="Save"/>
         #{/form}
     </div>

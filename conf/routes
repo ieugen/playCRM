@@ -4,8 +4,8 @@
 
 # Home page
 GET     /                                       Application.index
-POST    /cars/{id}/uploadpicture             Cars.uploadPicture
-POST    /customers/{id}/uploadpicture        Customers.uploadPicture
+POST    /cars/{id}/uploadfile                   Cars.uploadFile
+POST    /customers/{id}/uploadfile              Customers.uploadFile
 
 # Map CRUD module paths over root
 *      /                                       module:crud

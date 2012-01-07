@@ -19,25 +19,42 @@
 
 package models;
 
+import play.Logger;
 import play.db.jpa.Blob;
+import play.db.jpa.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
 /**
- * Make me change this description.
+ * Domain to model files associated to customers.
  * User: ieugen
  * Date: 29.12.2011
- * Time: 20:52
+ * Time: 20:58
  */
 @Entity
-public class CarPicture extends Picture{
+public class CustomerFile extends Model {
 
+    public String fileName;
+    public Blob blob;
     @ManyToOne
-    public Car owner;
+    public Customer owner;
 
-    public CarPicture(String pictureName, Blob image) {
-        super(pictureName, image);
+    public CustomerFile(String fileName, Blob blob) {
+        this.fileName = fileName;
+        this.blob = blob;
+    }
+
+    @Override
+    public String toString() {
+        return fileName + "\t" + blob.length() / 1024 + " KB";
+    }
+
+    @Override
+    public void _delete() {
+        Logger.info("Deleting file: " + fileName);
+        super._delete();
+        blob.getFile().delete();
     }
 
 }

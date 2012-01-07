@@ -8,14 +8,12 @@
     <div class="objectForm">
         #{form action:@save(object._key()), enctype:'multipart/form-data'}
         #{crud.form }
-        #{crud.custom 'carPictures'}
-
-
-        <label for="carsPictures">Car pictures</label><br/>
-        <ul id="carsPictures">
-            #{list items:object.carPictures, as:'pic'}
-            <li><a href="@{Application.getCarPicture(pic.id)}" name="${pic.pictureName}"><img
-                    src="@{Application.getCarPictureThumbnail(pic.id)}" alt="${pic.pictureName}"/></a></li>
+        #{crud.custom 'carFiles'}
+        <label for="carsFiles">Car files</label><br/>
+        <ul id="carsFiles">
+            #{list items:object.carFiles, as:'carFile'}
+            <li><a href="@{Application.getCarFile(carFile.id)}">${carFile.fileName}</a>
+            <a href="@{Application.deleteCarFile(object.id,carFile.id)}">Delete</a></li>
             #{/list}
         </ul>
 
@@ -36,12 +34,10 @@
     </p>
     #{/form}
 
-    <div class="pictureForm">
-        <h3 id="uploadPicture">Upload picture</h3>
-        #{form action:@Cars.uploadPicture(object.id,image), enctype:'multipart/form-data'}
-
-        <input type="hidden" name="id" value="${object._key()}"/>
-        <input type="file" name="image"/>
+    <div class="fileForm">
+        <h3 id="uploadFile">Upload file</h3>
+        #{form action:@Cars.uploadFile(object.id,file), enctype:'multipart/form-data'}
+        <input type="file" name="file"/>
         <input type="submit" name="submit" value="Save"/>
         #{/form}
     </div>
