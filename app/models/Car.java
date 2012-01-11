@@ -44,6 +44,10 @@ public class Car extends Model {
     public List<Event> events;
     @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL)
     public List<CarFile> carFiles;
+    @OneToOne
+    public Insurance insurance;
+    @OneToOne
+    public Inspection inspection;
 
     public Car(String serial, String plates, String info, Customer owner) {
         this.serial = serial;

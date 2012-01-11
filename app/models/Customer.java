@@ -41,6 +41,8 @@ public class Customer extends Model {
     public String ssn;
     @Lob
     public String info;
+    @OneToOne
+    public Residence residence;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     public List<Car> cars;
     @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL)

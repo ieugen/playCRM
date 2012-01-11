@@ -76,5 +76,4 @@ public class BasicTest extends UnitTest {
         assertEquals(2, bob.cars.size());
         assertEquals(1, ioan.cars.size());
     }
-
 }
