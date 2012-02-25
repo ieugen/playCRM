@@ -18,14 +18,18 @@
  ****************************************************************/
 package controllers;
 
-import play.mvc.With;
-
+import com.google.common.base.Objects;
 
 /**
- * CURUD for Events.
- *
- * @author ieugen
+ * Implement how users are quthenticated.
+ * @author Ioan Eugen Stan <stan.ieugen@gmail.com>
  */
-@With(Secure.class)
-public class Events extends CRUD {
+public class Security extends Secure.Security {
+
+    static boolean authenticate(String username, String password) {
+	if (Objects.equal("admin", username) && Objects.equal("pass", password)) {
+	    return true;
+	}
+	return false;
+    }
 }

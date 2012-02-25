@@ -18,22 +18,24 @@
  ****************************************************************/
 package controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import models.Car;
 import models.CarFile;
 import play.Logger;
 import play.data.validation.Required;
 import play.db.jpa.Blob;
 import play.libs.MimeTypes;
+import play.mvc.With;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 /**
  * Controller for Car.
  *
  * @author ieugen
  */
+@With(Secure.class)
 public class Cars extends CRUD {
 
     public static void uploadFile(@Required Long id, @Required File file) throws FileNotFoundException {

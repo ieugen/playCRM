@@ -3,12 +3,17 @@
 # ~~~~
 
 # Home page
-GET     /                                       Application.index
-POST    /cars/{id}/uploadfile                   Cars.uploadFile
-POST    /customers/{id}/uploadfile              Customers.uploadFile
+GET     /					Application.index
+GET	/customers				Customers.listCustomers	
+
+POST    /admin/cars/{id}/uploadfile             Cars.uploadFile
+POST    /admin/customers/{id}/uploadfile	Customers.uploadFile
 
 # Map CRUD module paths over root
-*      /                                       module:crud
+*      /admin                                   module:crud
+
+# Import Secure routes
+*       /                                       module:secure
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

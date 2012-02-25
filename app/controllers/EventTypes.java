@@ -18,12 +18,15 @@
  ****************************************************************/
 package controllers;
 
+import play.mvc.With;
+
 
 /**
  * CRUD for Event types.
  *
  * @author ieugen
  */
+@With(Secure.class)
 public class EventTypes extends CRUD {
 
 }

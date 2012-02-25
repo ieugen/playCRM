@@ -18,21 +18,22 @@
  ****************************************************************/
 package controllers;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import models.Customer;
 import models.CustomerFile;
 import play.data.validation.Required;
 import play.db.jpa.Blob;
 import play.libs.MimeTypes;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import play.mvc.With;
 
 /**
  * Controller for customer related requests.
  *
  * @author ieugen
  */
+@With(Secure.class)
 public class Customers extends CRUD {
 
     public static void uploadFile(@Required Long id, @Required File customerFile) throws FileNotFoundException {
@@ -44,5 +45,9 @@ public class Customers extends CRUD {
         customer.customerFiles.add(file1);
         file1.save();
         redirect(request.controller + ".show", Long.toString(id));
+    }
+
+    public static void listCustomers(){
+	redirect(request.controller + ".list");
     }
 }

@@ -2,6 +2,7 @@
 
 require:
     - play -> crud
+    - play -> secure
     - net.coobird.thumbnailator.Thumbnails -> Thumbnailator 0.3.10-all
     - com.google.guava -> guava 11.0.1
 
