@@ -18,6 +18,7 @@
  ****************************************************************/
 package models;
 
+import com.google.common.base.Objects;
 import play.db.jpa.Model;
 
 import javax.persistence.*;
@@ -45,53 +46,47 @@ public class Customer extends Model {
     public Residence residence;
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     public List<Car> cars;
-    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     public List<CustomerFile> customerFiles;
-    
-    
+
     public Customer(String fullName, String address, String phone1,
-                    String phone2, String city, String ssn, String info) {
-        this.fullName = fullName;
-        this.address = address;
-        this.city = city;
-        this.phone1 = phone1;
-        this.phone2 = phone2;
-        this.ssn = ssn;
-        this.info = info;
-        this.cars = new ArrayList<Car>();
-        this.customerFiles = new ArrayList<CustomerFile>();
+		    String phone2, String city, String ssn, String info) {
+	this.fullName = fullName;
+	this.address = address;
+	this.city = city;
+	this.phone1 = phone1;
+	this.phone2 = phone2;
+	this.ssn = ssn;
+	this.info = info;
+	this.cars = new ArrayList<Car>();
+	this.customerFiles = new ArrayList<CustomerFile>();
     }
 
     public Customer addCar(String serial, String plates, String info) {
-        Car newCar = new Car(serial, plates, info, this).save();
-        this.cars.add(newCar);
-        this.save();
-        return this;
+	Car newCar = new Car(serial, plates, info, this).save();
+	this.cars.add(newCar);
+	this.save();
+	return this;
     }
-
 
     @Override
     public int hashCode() {
-        return ssn.hashCode();
+	return Objects.hashCode(ssn);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Customer other = (Customer) obj;
-        if ((this.ssn == null) ? (other.ssn != null) : !this.ssn.equals(other.ssn)) {
-            return false;
-        }
-        return true;
+	if (obj instanceof Customer) {
+	    final Customer other = (Customer) obj;
+	    return Objects.equal(ssn, other.ssn);
+	} else {
+	    return false;
+	}
     }
 
     @Override
     public String toString() {
-        return "[" + id + " " + fullName + " " + ssn + " " + city + "]";
+	return Objects.toStringHelper(this).add("id", id).add("name", fullName).
+		add("ssn", ssn).add("city", city).toString();
     }
 }
