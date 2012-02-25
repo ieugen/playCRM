@@ -18,6 +18,7 @@
  ****************************************************************/
 package models;
 
+import com.google.common.base.Objects;
 import play.db.jpa.Model;
 
 import javax.persistence.*;
@@ -34,15 +35,15 @@ import java.util.List;
 public class Car extends Model {
 
     @Column(unique = true)
-    public String serial;
-    @Column(unique = true)
     public String plates;
+    @Column(unique = true)
+    public String serial;
     public String info;
     @ManyToOne
     public Customer owner;
     @OneToMany(mappedBy = "target", cascade = CascadeType.ALL)
     public List<Event> events;
-    @OneToMany(mappedBy = "owner",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     public List<CarFile> carFiles;
     @OneToOne
     public Insurance insurance;
@@ -50,36 +51,33 @@ public class Car extends Model {
     public Inspection inspection;
 
     public Car(String serial, String plates, String info, Customer owner) {
-        this.serial = serial;
-        this.info = info;
-        this.plates = plates;
-        this.owner = owner;
-        this.events = new ArrayList<Event>();
-        this.carFiles = new ArrayList<CarFile>();
+	this.serial = serial;
+	this.info = info;
+	this.plates = plates;
+	this.owner = owner;
+	this.events = new ArrayList<Event>();
+	this.carFiles = new ArrayList<CarFile>();
     }
 
     @Override
     public int hashCode() {
-        return serial.hashCode();
+	return Objects.hashCode(plates, serial);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Car other = (Car) obj;
-        if ((this.serial == null) ? (other.serial != null) : !this.serial.equals(other.serial)) {
-            return false;
-        }
-        return true;
+	if (obj instanceof Car) {
+	    final Car other = (Car) obj;
+	    return Objects.equal(plates, other.plates) &&
+		   Objects.equal(serial, other.serial);
+	} else {
+	    return false;
+	}
     }
 
     @Override
     public String toString() {
-        return "[" + id + " " + owner.getId() + " " + serial + " " + plates + "]";
+	return Objects.toStringHelper(this).add("plates", plates).
+		add("serial", serial).toString();
     }
 }
