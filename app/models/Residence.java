@@ -15,7 +15,7 @@ import java.util.Date;
  * Time: 03:38
  */
 @Entity
-public class Residence extends Model{
+public class Residence extends Model {
 
     public String info;
     @Temporal(TemporalType.DATE)

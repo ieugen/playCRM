@@ -5,3 +5,6 @@
 /lib
 
 /.idea/
+/precompiled/
+/jar/
+/modules/

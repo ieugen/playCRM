@@ -15,7 +15,7 @@ import java.util.Date;
  * Time: 03:26
  */
 @Entity
-public class Insurance extends Model{
+public class Insurance extends Model {
 
     public String info;
     @Temporal(TemporalType.DATE)
