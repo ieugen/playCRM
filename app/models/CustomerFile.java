@@ -16,9 +16,9 @@
  * specific language governing permissions and limitations                    *
  * under the License.                                                         *
  ******************************************************************************/
-
 package models;
 
+import com.google.common.base.Objects;
 import play.Logger;
 import play.db.jpa.Blob;
 import play.db.jpa.Model;
@@ -41,20 +41,20 @@ public class CustomerFile extends Model {
     public Customer owner;
 
     public CustomerFile(String fileName, Blob blob) {
-        this.fileName = fileName;
-        this.blob = blob;
+	this.fileName = fileName;
+	this.blob = blob;
     }
 
     @Override
     public String toString() {
-        return fileName + "\t" + blob.length() / 1024 + " KB";
+	return Objects.toStringHelper(fileName).add("size(kb)",
+		blob.length() / 1024).toString();
     }
 
     @Override
     public void _delete() {
-        Logger.info("Deleting file: " + fileName);
-        super._delete();
-        blob.getFile().delete();
+	Logger.info("Deleting file: " + fileName);
+	super._delete();
+	blob.getFile().delete();
     }
-
 }
